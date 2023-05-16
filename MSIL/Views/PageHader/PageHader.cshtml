@@ -1,0 +1,40 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using MSIL.Extensions
+@using Sitecore.Links.UrlBuilders
+
+@model RenderingModel
+
+@{
+    ItemUrlBuilderOptions options = new ItemUrlBuilderOptions();
+    options.LowercaseUrls = true;
+    options.LanguageEmbedding = Sitecore.Links.LanguageEmbedding.Never;
+    //var currentUrl = Sitecore.Links.LinkManager.GetItemUrl(Model.PageItem);
+}
+@if (Model != null && Model.PageItem != null)
+{
+    <div class="container-fluid page-header mb-5 p-0" style="background-image: url(~/img/carousel-1.jpg);">
+        <div class="container-fluid page-header-inner py-5">
+            <div class="container text-center pb-5">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">@Html.Sitecore().Field("Title", Model.PageItem)</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page"><a href="@Model.PageItem.Url(options)">@Html.Sitecore().Field("Title", Model.PageItem)</a></li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="language-switcher dropdown show">
+                <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Language</button>
+                <div class="dropdown-menu dropdown-menu-right show" x-placement="bottom-end" style="position: absolute; transform: translate3d(-130px, 30px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <div class="inner">
+                        <a class="dropdown-item " href="http://msilcommercial.local/" data-lang="">English</a>
+                        <a class="dropdown-item " href="http://msilcommercial.local/" data-lang="ar">arabic</a>
+                        <a class="dropdown-item " href="http://msilcommercial.local/" data-lang="zh-cn">中文简体</a>
+                        <a class="dropdown-item " href="http://msilcommercial.local/" data-lang="de">Deutsch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
